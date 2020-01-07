@@ -1,5 +1,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var userCRUD = require("./userHandling/CRUD");
+
+userCRUD.connectUserDb();
 
 var path = require("path");
 var welcome = express();
@@ -20,4 +23,9 @@ welcome.get("/", (req, res) => {
 
 welcome.post("/adduser", (req, res) => {
   console.log(req.body);
+  var failed = userCRUD.addUser(req.body);
+  if (failed) {
+    res.sendStatus(500);
+  }
+  res.sendStatus(200);
 });
