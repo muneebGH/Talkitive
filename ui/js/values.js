@@ -1,4 +1,20 @@
-var createAccount = String.raw`<div id="email_form" class="form-group">
+var createAccount = String.raw`
+
+
+
+<label for="full_name_ca">Full name</label>
+<input class="form-control" type="text" placeholder="john doe" id="full_name_ca"/>
+</br>
+
+
+
+
+<label for="user_name_ca">User name</label>
+<input class="form-control" type="text" placeholder="johndoe123" id="user_name_ca"/>
+
+
+</br>
+<div id="email_form" class="form-group">
 <label for="exampleInputEmail1">Email address</label>
 <input
   type="email"
@@ -19,4 +35,5 @@ var createAccount = String.raw`<div id="email_form" class="form-group">
   id="exampleInputPassword1"
   placeholder="Password"
 />
+
 </div>`;
