@@ -15,11 +15,11 @@ var createAccount = String.raw`
 
 </br>
 <div id="email_form" class="form-group">
-<label for="exampleInputEmail1">Email address</label>
+<label for="email_ca">Email address</label>
 <input
   type="email"
   class="form-control"
-  id="exampleInputEmail1"
+  id="email_ca"
   aria-describedby="emailHelp"
   placeholder="Enter email"
 />
@@ -28,12 +28,20 @@ var createAccount = String.raw`
 >
 </div>
 <div id="password_form" class="form-group">
-<label for="exampleInputPassword1">Password</label>
+<label for="password_ca">Password</label>
 <input
   type="password"
   class="form-control"
-  id="exampleInputPassword1"
+  id="password_ca"
   placeholder="Password"
 />
 
-</div>`;
+</div>
+
+<button
+id="create_account_2"
+type="button"
+class="btn btn-danger btn-lg btn-block"
+>
+Create Account
+</button>`;
