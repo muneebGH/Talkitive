@@ -36,5 +36,6 @@ function addUserToDB(user) {
 
 module.exports = {
   addUser: addUserToDB,
-  connectUserDb: establishConnection
+  connectUserDb: establishConnection,
+  userDB: UserModel
 };

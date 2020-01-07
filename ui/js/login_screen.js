@@ -1,5 +1,6 @@
 $(() => {
   $("#create_account").click(setPageForCreateAccount);
+  $("login_button").click(validateUser);
 });
 
 function setPageForCreateAccount() {
@@ -26,4 +27,13 @@ function addUser() {
 
   console.log(user.fullname);
   $.post("http://localhost:3301/adduser", user);
+}
+
+function validateUser() {
+  user = {
+    email: $("#email_login").val(),
+    password: $("#password_login").val()
+  };
+
+  $.get("http://localhost:3301/login/email?=");
 }

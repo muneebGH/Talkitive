@@ -27,5 +27,5 @@ welcome.post("/adduser", (req, res) => {
   if (failed) {
     res.sendStatus(500);
   }
-  res.sendStatus(200);
+  res.sendFile(path.resolve("../ui/screens/chat_screen.html"));
 });
