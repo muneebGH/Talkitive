@@ -1,19 +1,6 @@
 $(() => {
   $("login_button").click(validateUser);
-  $("#create_account").click(setPageForCreateAccount);
-  $("login_button").click(validateUser);
 });
-
-function setPageForCreateAccount() {
-  //console.log("set page for create account called ");
-  $(".inputStuff").empty();
-  $("#login_button_div").remove();
-  $("#create_account").remove();
-  $("#dont_have_acc").text("Click to create account");
-
-  $(".inputStuff").append(createAccount);
-  $("#create_account_2").click(addUser);
-}
 
 function addUser() {
   var user = {
@@ -36,7 +23,20 @@ function validateUser() {
   $.get(
     `http://localhost:3301/login?email=${user.email}&password=${user.password}`,
     data => {
-      console.log("yes or no ?:" + data);
+      console.log("inside function");
+      console.log(data);
+      console.log(user);
+
+      try {
+        if (data[0].password == user.password) {
+          console.log("yes called ");
+          window.location.href = "http://localhost:3301/selectUser";
+        } else {
+          alert("no man u cannot fool me ");
+        }
+      } catch (error) {
+        alert("Again plzz ");
+      }
     }
   );
 }

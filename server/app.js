@@ -27,11 +27,11 @@ io.on("connection", socket => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("./ui/screens/signup_screen.html"));
+  res.sendFile(path.resolve("./ui/screens/login_screen.html"));
 });
 
-app.get("/home", (req, res) => {
-  res.sendFile(path.resolve("./ui/screens/login_screen.html"));
+app.get("/signup", (req, res) => {
+  res.sendFile(path.resolve("./ui/screens/signup_screen.html"));
 });
 app.get("/chat", (req, res) => {
   res.sendFile(path.resolve("./ui/screens/chat_screen.html"));
@@ -66,15 +66,15 @@ app.post("/adduser", (req, res) => {
   //res.sendFile(path.resolve("./ui/screens/chat_screen.html"));
 });
 
+app.get("/selectUser", (req, res) => {
+  res.sendFile(path.resolve("./ui/screens/select_user_screen.html"));
+});
+
 app.get("/login", async (req, res) => {
   var email = req.param("email");
   var pass = req.param("password");
   var pass = req.param("password");
-  var data = await loginValidation.findUser(email, pass);
-  if (data) {
-    console.log("data came to get login" + data);
-    res.status(200).send(data._id);
-  } else {
-    res.sendStatus(200);
-  }
+  var resp = await loginValidation.findUser(email, pass);
+
+  res.send(resp);
 });

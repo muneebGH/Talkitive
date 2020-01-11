@@ -82,10 +82,10 @@
               class="container d-flex justify-content-center"
             >
               <button
-                type="submit"
+                type="button"
                 id="login_button"
                 class="btn btn-outline-info"
-                onclick=""
+                onclick="validateUser()"
               >
                 Login
               </button>
@@ -94,13 +94,14 @@
             <small id="dont_have_acc" class="form-text text-muted"
               >Dont have an account?</small
             >
-            <button
-              id="create_account"
+            <a
+              href="http://localhost:3301/signup"
               type="button"
+              id="create_account"
               class="btn btn-danger btn-lg btn-block"
             >
               Create Account
-            </button>
+            </a>
           </form>
         </div>
       </div>
