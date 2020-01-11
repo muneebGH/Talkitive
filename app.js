@@ -3,9 +3,9 @@ var app = express();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
 var bodyParser = require("body-parser");
-var userCRUD = require("./userHandling/CRUD");
-var loginValidation = require("./userHandling/loginValidation");
-var messageHandler = require("./messageHandling/holdMessages");
+var userCRUD = require("./CRUD");
+var loginValidation = require("./loginValidation");
+var messageHandler = require("./holdMessages");
 
 var senderId = "123";
 var recieverId = "456";
@@ -13,8 +13,9 @@ var recieverId = "456";
 userCRUD.establishConnection();
 
 var path = require("path");
+console.log(__dirname);
 
-app.use(express.static(__dirname.substring(0, __dirname.length - 6) + "/ui"));
+app.use(express.static(__dirname));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,11 +29,11 @@ io.on("connection", socket => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("./ui/screens/login_screen.html"));
+  res.sendFile(path.resolve("login_screen.html"));
 });
 
 app.get("/chat", (req, res) => {
-  res.sendFile(path.resolve("./ui/screens/chat_screen.html"));
+  res.sendFile(path.resolve("chat_screen.html"));
 });
 
 app.get("/messages", async (req, res) => {
