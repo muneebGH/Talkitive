@@ -1,5 +1,9 @@
+body {
+  background-color: #ffc106;
+}
+
 .container {
-  max-width: 1170px;
+  max-width: 1300px;
   margin: auto;
 }
 img {
@@ -132,8 +136,9 @@ img {
 }
 .mesgs {
   float: left;
-  padding: 30px 15px 0 25px;
-  width: 60%;
+  padding: 10px 25px 0 5px;
+  margin-left: 10%;
+  width: 80%;
 }
 
 .sent_msg p {
@@ -184,5 +189,6 @@ img {
 }
 .msg_history {
   height: 516px;
+  padding: 50px;
   overflow-y: auto;
 }

@@ -1,6 +1,6 @@
 var db = require("mongoose");
 
-function establishConnection() {
+async function establishConnection() {
   dbUrl = String.raw`mongodb+srv://root:iamroot@users-zkdte.mongodb.net/test?retryWrites=true&w=majority`;
 
   db.connect(
@@ -8,6 +8,7 @@ function establishConnection() {
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
       console.log("a user connected ");
+      console.log("error in user connection =" + err);
     }
   );
 }
@@ -21,8 +22,8 @@ var UserSchema = new db.Schema({
 
 var UserModel = db.model("UserModel", UserSchema);
 
-function addUserToDB(user) {
-  // establishConnection();
+async function addUserToDB(user) {
+  await establishConnection();
 
   var userToBeInserted = new UserModel(user);
   userToBeInserted.save(err => {
@@ -36,6 +37,6 @@ function addUserToDB(user) {
 
 module.exports = {
   addUser: addUserToDB,
-  connectUserDb: establishConnection,
+  establishConnection: establishConnection,
   userDB: UserModel
 };

@@ -45,3 +45,29 @@ class="btn btn-danger btn-lg btn-block"
 >
 Create Account
 </button>`;
+
+function incomingMessage(text) {
+  return String.raw`<div class="incoming_msg">
+  <div class="incoming_msg_img">
+    <img
+      src="https://ptetutorials.com/images/user-profile.png"
+      alt="sunil"
+    />
+  </div>
+  <div class="received_msg">
+    <div class="received_withd_msg">
+      <p>${text}</p>
+      <span class="time_date"> 11:01 AM | June 9</span>
+    </div>
+  </div>
+</div>`;
+}
+
+function outgoingMessage(text) {
+  return String.raw`<div class="outgoing_msg">
+  <div class="sent_msg">
+    <p>${text}</p>
+    <span class="time_date"> 11:01 AM | June 9</span>
+  </div>
+</div>`;
+}

@@ -1,9 +1,11 @@
 $(() => {
+  $("login_button").click(validateUser);
   $("#create_account").click(setPageForCreateAccount);
   $("login_button").click(validateUser);
 });
 
 function setPageForCreateAccount() {
+  //console.log("set page for create account called ");
   $(".inputStuff").empty();
   $("#login_button_div").remove();
   $("#create_account").remove();
@@ -35,5 +37,11 @@ function validateUser() {
     password: $("#password_login").val()
   };
 
-  $.get("http://localhost:3301/login/email?=");
+  console.log("validate user called ");
+  $.get(
+    `http://localhost:3301/login?email=${user.email}&password=${user.password}`,
+    data => {
+      console.log("yes or no ?:" + data);
+    }
+  );
 }
