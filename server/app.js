@@ -27,9 +27,12 @@ io.on("connection", socket => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("./ui/screens/login_screen.html"));
+  res.sendFile(path.resolve("./ui/screens/signup_screen.html"));
 });
 
+app.get("/home", (req, res) => {
+  res.sendFile(path.resolve("./ui/screens/login_screen.html"));
+});
 app.get("/chat", (req, res) => {
   res.sendFile(path.resolve("./ui/screens/chat_screen.html"));
 });
@@ -57,9 +60,10 @@ app.post("/adduser", (req, res) => {
   var failed = userCRUD.addUser(req.body);
   if (failed) {
     res.sendStatus(500);
+  } else {
+    res.sendStatus(200);
   }
   //res.sendFile(path.resolve("./ui/screens/chat_screen.html"));
-  res.sendStatus(200);
 });
 
 app.get("/login", async (req, res) => {

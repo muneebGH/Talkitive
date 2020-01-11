@@ -16,10 +16,6 @@ function setPageForCreateAccount() {
 }
 
 function addUser() {
-  console.log(undefined);
-  console.log(1);
-  console.log(document.getElementById("full_name_ca").value);
-  console.log($("#full_name_ca").text());
   var user = {
     fullname: $("#full_name_ca").val(),
     userName: $("#user_name_ca").val(),
@@ -27,7 +23,6 @@ function addUser() {
     password: $("#password_ca").val()
   };
 
-  console.log(user.fullname);
   $.post("http://localhost:3301/adduser", user);
 }
 

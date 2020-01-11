@@ -23,16 +23,21 @@ var UserSchema = new db.Schema({
 var UserModel = db.model("UserModel", UserSchema);
 
 async function addUserToDB(user) {
+  var done = true;
   await establishConnection();
+
+  console.log("adding user below");
+  console.log(user);
 
   var userToBeInserted = new UserModel(user);
   userToBeInserted.save(err => {
     console.log(err);
     if (err) {
-      return false;
+      done = false;
     }
-    return true;
   });
+
+  return done;
 }
 
 module.exports = {
