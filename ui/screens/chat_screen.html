@@ -17,7 +17,6 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="chat_screen.css" />
 
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
@@ -25,9 +24,8 @@
       rel="stylesheet"
     />
 
-    <script src="../js/chat_screen.js"></script>
     <script src="../js/values.js"></script>
-    <script src="../../node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -391,3 +389,40 @@
     overflow-y: auto;
   }
 </style>
+
+<script>
+  var socket = io();
+
+  var senderInUI = "123";
+  var recieverInUi = "456";
+
+  $(() => {
+    $("#send_message").click(sendMessage);
+    getMessages();
+  });
+
+  function sendMessage() {
+    var text = $("#type_message").val();
+    console.log(text);
+    $.post("http://localhost:3301/messages", { message: text });
+  }
+
+  socket.on("message", insertMessage);
+
+  function getMessages() {
+    $.get("http://localhost:3301/messages", data => {
+      console.log("data in get called on client side :" + data);
+      data.forEach(element => {
+        insertMessage(element);
+      });
+    });
+  }
+
+  function insertMessage(message) {
+    if (message.sender == senderInUI) {
+      $("#all_messages").append(outgoingMessage(message.message));
+    } else {
+      $("#all_messages").append(incomingMessage(message.message));
+    }
+  }
+</script>

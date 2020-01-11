@@ -9,7 +9,7 @@ $(() => {
 
 function sendMessage() {
   var text = $("#type_message").val();
-  $.post("hhttp://localhost:3301/messages", text);
+  $.post("http://localhost:3301/messages", text);
 }
 
 socket.on("message", insertMessage);

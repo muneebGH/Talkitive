@@ -1,5 +1,3 @@
-
-
 var db = require("mongoose");
 
 function establishConnection() {
@@ -25,6 +23,7 @@ var message = db.model("Messages", Messages);
 
 async function addMessage(messageIn) {
   var done = true;
+
   await establishConnection();
   var messageToBeInserted = new message(messageIn);
   messageToBeInserted.save(err => {

@@ -18,9 +18,8 @@ app.use(express.static(__dirname.substring(0, __dirname.length - 6) + "/ui"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.listen(3301, () => {
-  console.log("something happened");
-  console.log(__dirname.length);
+http.listen(3301, () => {
+  console.log("server listening ");
 });
 
 io.on("connection", socket => {
@@ -36,13 +35,20 @@ app.get("/chat", (req, res) => {
 });
 
 app.get("/messages", async (req, res) => {
-  var res = await messageHandler.getAllOf(senderId, recieverId);
-  return res;
+  var resp = await messageHandler.getAllOf(senderId, recieverId);
+
+  res.send(resp);
 });
 
 app.post("/messages", (req, res) => {
-  var done = messageHandler.addMessage(req.body);
-  io.emit("message", res.body);
+  var message = {
+    sender: senderId,
+    reciever: recieverId,
+    message: req.body.message
+  };
+
+  var done = messageHandler.addMessage(message);
+  io.emit("message", message);
   done ? res.sendStatus(200) : res.sendStatus(500);
 });
 
