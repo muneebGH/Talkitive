@@ -1,4 +1,5 @@
 $(() => {
+  console.log(document.cookie);
   $("login_button").click(validateUser);
 });
 
@@ -30,7 +31,7 @@ function validateUser() {
       try {
         if (data[0].password == user.password) {
           console.log("yes called ");
-          window.location.href = "http://localhost:3301/selectUser";
+          window.location.href = "http://localhost:3301/selectChatRoom";
         } else {
           alert("no man u cannot fool me ");
         }

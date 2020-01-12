@@ -46,6 +46,33 @@ class="btn btn-danger btn-lg btn-block"
 Create Account
 </button>`;
 
+function chatRoomValue(chatRoom) {
+  var type = "";
+  if (chatRoom.user == "muneeb") {
+    type = "featured";
+  } else {
+    type = "local";
+  }
+  return String.raw`
+  <div class="card text-center rounded">
+                <div class="card-header" style="background-color: #66cccc; color: #fff;">
+                  ${type}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title" >${chatRoom.title}</h5>
+                  <p class="card-text">${chatRoom.discription}</p>
+                 
+                <input type="text" placeholder="Enter key "><br>
+                  
+                  <a href="#" class="btn" style="background-color: #cc0066;color: #fff;margin-top: 10px;">Join Room</a>
+                </div>
+                <div class="card-footer text-muted" style="background-color: #66cccc;">
+                  created by : ${chatRoom.user}
+                </div>
+              </div>
+              <br><br>`;
+}
+
 function incomingMessage(text) {
   return String.raw`<div class="incoming_msg">
   <div class="incoming_msg_img">
