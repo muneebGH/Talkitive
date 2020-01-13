@@ -1,3 +1,3 @@
 # Talkitive
 
-A real time NLP based chat app using mern stack
+A real time web messenger using express and node
