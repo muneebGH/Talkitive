@@ -1,7 +1,7 @@
 var db = require("mongoose");
 
 async function establishConnection() {
-  dbUrl = String.raw`mongodb+srv://root:iamroot@users-zkdte.mongodb.net/chatrooms?retryWrites=true&w=majority`;
+  dbUrl = String.raw`mongodb+srv://root:iamroot@users-zkdte.mongodb.net/test?retryWrites=true&w=majority`;
 
   await db.connect(
     dbUrl,
@@ -20,7 +20,7 @@ var chatRoomSchema = new db.Schema({
   user: String
 });
 
-var chatRoom = db.model("chatRooms", chatRoomSchema);
+var chatRoom = db.model("Chatrooms", chatRoomSchema);
 
 async function addChatRoom(chatRoomIn) {
   var done = true;
@@ -43,8 +43,23 @@ async function getAll() {
   var res = await chatRoom.find({});
   return res;
 }
+
+async function validateChatRoom(titleIn, passwordIn) {
+  var yes = "";
+  var res = await chatRoom.find(
+    { title: titleIn, password: passwordIn },
+    (err, res) => {
+      console.log("err in find chatroom  : " + err);
+    }
+  );
+  console.log("prinitng response chatroom db below");
+  console.log(res);
+  return res;
+}
+
 module.exports = {
   addChatRoom: addChatRoom,
   getAllChatRooms: getAll,
-  establishConn: establishConnection
+  establishConn: establishConnection,
+  validate: validateChatRoom
 };

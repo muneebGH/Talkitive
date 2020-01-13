@@ -20,7 +20,7 @@ var UserSchema = new db.Schema({
   password: String
 });
 
-var UserModel = db.model("UserModel", UserSchema);
+var UserModel = db.model("Users", UserSchema);
 
 async function addUserToDB(user) {
   var done = true;

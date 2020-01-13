@@ -64,7 +64,7 @@ function chatRoomValue(chatRoom) {
                  
                 <input type="text" placeholder="Enter key "><br>
                   
-                  <a href="#" class="btn" style="background-color: #cc0066;color: #fff;margin-top: 10px;">Join Room</a>
+                  <button onclick="joinChatRoom(event)" class="btn" style="background-color: #cc0066;color: #fff;margin-top: 10px;">Join Room</button>
                 </div>
                 <div class="card-footer text-muted" style="background-color: #66cccc;">
                   created by : ${chatRoom.user}

@@ -1,10 +1,11 @@
 var db = require("./CRUD");
 
 async function findUser(email1, pass) {
+  console.log(email1, pass);
   var res = await db.userDB.find(
     { email: email1, password: pass },
     (err, res) => {
-      console.log("err in find user  : " + err);
+      console.log("err in find user  : " + err + res);
     }
   );
 

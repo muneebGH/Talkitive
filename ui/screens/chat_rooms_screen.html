@@ -139,6 +139,20 @@ $.post("/addChatRoom",{title:title,discription:discription,password:password});
 
 }
 
+
+function joinChatRoom(event){
+    console.log("iam called");
+
+    var target = $( event.target );
+
+    var password=target.siblings('input').val();
+    var title=target.siblings('h5').text();
+  
+    $.get(`/verifyChatRoom?title=${title}&password=${password}`,(data)=>{
+        console.log(data);
+    })
+
+}
 socket.on("chatRoomAdded",addChatRoom);
 
 function addChatRoom(chatRoom){

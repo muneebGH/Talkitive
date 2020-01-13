@@ -1,4 +1,5 @@
 var express = require("express");
+var session = require("express-session");
 var cookieParser = require("cookie-parser");
 var app = express();
 var http = require("http").createServer(app);
@@ -32,6 +33,14 @@ io.on("connection", socket => {
 });
 
 app.get("/", (req, res) => {
+  try {
+    console.log(req.cookies);
+    if (req.cookies.userName) {
+      return res.redirect("/selectChatRoom");
+    }
+  } catch (error) {
+    console.log("error bro haha not");
+  }
   res.sendFile(path.resolve("./ui/screens/login_screen.html"));
 });
 
@@ -40,12 +49,12 @@ app.post("/reciever", (req, res) => {
 });
 
 app.get("/signup", (req, res) => {
-  res.clearCookie("email");
+  res.clearCookie("userName");
   res.sendFile(path.resolve("./ui/screens/signup_screen.html"));
 });
 app.get("/chat", (req, res) => {
-  senderId = req.cookies.userName;
-  recieverId = req.cookies.recieverName;
+  // senderId = req.cookies.userName;
+  // recieverId = req.cookies.recieverName;
   res.sendFile(path.resolve("./ui/screens/chat_screen.html"));
 });
 
@@ -84,12 +93,22 @@ app.get("/selectChatRoom", (req, res) => {
 });
 
 app.get("/login", async (req, res) => {
+  try {
+    res.clearCookie("chatRoomTitle");
+  } catch (error) {
+    console.log("there wasnt any cookir of chatRoomTitle");
+  }
   var email = req.param("email");
   var pass = req.param("password");
   var pass = req.param("password");
   var resp = await loginValidation.findUser(email, pass);
 
-  res.cookie("userName", resp[0].userName);
+  try {
+    res.cookie("userName", resp[0].userName);
+  } catch (error) {
+    console.log("no cookie saved ");
+  }
+
   res.send(resp);
 });
 
@@ -121,4 +140,23 @@ app.post("/addChatRoom", (req, res) => {
 app.get("/getAllChatRooms", async (req, res) => {
   var data = await chatRoomHandler.getAllChatRooms();
   res.send(data);
+});
+
+app.get("/verifyChatRoom", async (req, res) => {
+  var title = req.param("title");
+  var password = req.param("password");
+  var data = await chatRoomHandler.validate(title, password);
+
+  console.log("server side log verify chat room");
+
+  try {
+    if (data[0].title == title) {
+      res.cookie("chatRoomTitle", data[0].title);
+      res.send({ status: "true" });
+    } else {
+      res.send({ status: "false" });
+    }
+  } catch (error) {
+    res.send({ status: "false" });
+  }
 });
