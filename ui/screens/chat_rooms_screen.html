@@ -149,7 +149,14 @@ function joinChatRoom(event){
     var title=target.siblings('h5').text();
   
     $.get(`/verifyChatRoom?title=${title}&password=${password}`,(data)=>{
-        console.log(data);
+
+      console.log(data);
+        if(data.status=="true"){
+            window.location.href="http://localhost:3301/chat";
+        }else{
+
+          alert("again");
+        }
     })
 
 }

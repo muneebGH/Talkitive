@@ -16,6 +16,13 @@ var recieverId = "456";
 
 userCRUD.establishConnection();
 chatRoomHandler.establishConn();
+messageHandler.connectMessageDb();
+
+async function connectDB() {
+  await userCRUD.establishConnection();
+  await chatRoomHandler.establishConn();
+  await messageHandler.connectMessageDb();
+}
 
 var path = require("path");
 
@@ -32,7 +39,8 @@ io.on("connection", socket => {
   console.log("socket io successfull");
 });
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  //  await connectDB();
   try {
     console.log(req.cookies);
     if (req.cookies.userName) {
@@ -55,20 +63,23 @@ app.get("/signup", (req, res) => {
 app.get("/chat", (req, res) => {
   // senderId = req.cookies.userName;
   // recieverId = req.cookies.recieverName;
+  var user = req.cookies.userName.toString();
+  console.log();
+  io.emit("setUserNameChatScreen", { userName: user });
   res.sendFile(path.resolve("./ui/screens/chat_screen.html"));
 });
 
 app.get("/messages", async (req, res) => {
-  var resp = await messageHandler.getAllOf(senderId, recieverId);
+  var resp = await messageHandler.getAllOf(req.cookies.chatRoomTitle);
 
   res.send(resp);
 });
 
 app.post("/messages", (req, res) => {
   var message = {
-    sender: senderId,
-    reciever: recieverId,
-    message: req.body.message
+    chatRoomTitle: req.cookies.chatRoomTitle,
+    senderUserName: req.cookies.userName,
+    text: req.body.text
   };
 
   var done = messageHandler.addMessage(message);
@@ -148,6 +159,7 @@ app.get("/verifyChatRoom", async (req, res) => {
   var data = await chatRoomHandler.validate(title, password);
 
   console.log("server side log verify chat room");
+  console.log(data);
 
   try {
     if (data[0].title == title) {

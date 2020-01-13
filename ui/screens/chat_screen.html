@@ -58,118 +58,28 @@
           Chat Room
         </h1>
         <div class="messaging">
-          <div class="mesgs bg-white shadow-lg">
+          <div
+            class="mesgs bg-white shadow-lg"
+            style="box-shadow: 0 1rem 3rem #cc0066 !important"
+          >
             <div id="all_messages" class="msg_history">
-              <div class="incoming_msg">
-                <div class="incoming_msg_img">
-                  <img
-                    src="https://ptetutorials.com/images/user-profile.png"
-                    alt="sunil"
-                  />
-                </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>Test which is a new approach to have all solutions</p>
-                    <span class="time_date"> 11:01 AM | June 9</span>
-                  </div>
-                </div>
-              </div>
-              <div class="outgoing_msg">
-                <div class="sent_msg">
-                  <p>Test which is a new approach to have all solutions</p>
-                  <span class="time_date"> 11:01 AM | June 9</span>
-                </div>
-              </div>
-              <div class="incoming_msg">
-                <div class="incoming_msg_img">
-                  <img
-                    src="https://ptetutorials.com/images/user-profile.png"
-                    alt="sunil"
-                  />
-                </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>Test, which is a new approach to have</p>
-                    <span class="time_date"> 11:01 AM | Yesterday</span>
-                  </div>
-                </div>
-              </div>
-              <div class="outgoing_msg">
-                <div class="sent_msg">
-                  <p>Apollo University, Delhi, India Test</p>
-                  <span class="time_date"> 11:01 AM | Today</span>
-                </div>
-              </div>
-              <div class="incoming_msg">
-                <div class="incoming_msg_img">
-                  <img
-                    src="https://ptetutorials.com/images/user-profile.png"
-                    alt="sunil"
-                  />
-                </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>
-                      We work directly with our designers and suppliers, and
-                      sell direct to you, which means quality, exclusive
-                      products, at a price anyone can afford.
-                    </p>
-                    <span class="time_date"> 11:01 AM | Today</span>
-                  </div>
-                </div>
-              </div>
-              <div class="incoming_msg">
-                <div class="incoming_msg_img">
-                  <img
-                    src="https://ptetutorials.com/images/user-profile.png"
-                    alt="sunil"
-                  />
-                </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>
-                      We work directly with our designers and suppliers, and
-                      sell direct to you, which means quality, exclusive
-                      products, at a price anyone can afford.
-                    </p>
-                    <span class="time_date"> 11:01 AM | Today</span>
-                  </div>
-                </div>
-              </div>
-              <div class="incoming_msg">
-                <div class="incoming_msg_img">
-                  <img
-                    src="https://ptetutorials.com/images/user-profile.png"
-                    alt="sunil"
-                  />
-                </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>
-                      We work directly with our designers and suppliers, and
-                      sell direct to you, which means quality, exclusive
-                      products, at a price anyone can afford.
-                    </p>
-                    <span class="time_date"> 11:01 AM | Today</span>
-                  </div>
-                </div>
-              </div>
-              <div class="incoming_msg">
-                <div class="incoming_msg_img">
-                  <img
-                    src="https://ptetutorials.com/images/user-profile.png"
-                    alt="sunil"
-                  />
-                </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>
-                      We work directly with our designers and suppliers, and
-                      sell direct to you, which means quality, exclusive
-                      products, at a price anyone can afford.
-                    </p>
-                    <span class="time_date"> 11:01 AM | Today</span>
-                  </div>
+              <div
+                class="card shadow-sm rounded-pill "
+                style="background-color: #ff6666;box-shadow: 0 .25rem 2rem #66cccc !important"
+              >
+                <div class="card-body">
+                  <h5
+                    class="card-title justify-content-center d-flex"
+                    style="color: #fff;"
+                  >
+                    wer
+                  </h5>
+                  <p
+                    class="card-text justify-content-center d-flex"
+                    style="color: #fff;"
+                  >
+                    sdf
+                  </p>
                 </div>
               </div>
             </div>
@@ -394,8 +304,7 @@
 <script>
   var socket = io();
 
-  var senderInUI = "123";
-  var recieverInUi = "456";
+  var userName = "";
 
   $(() => {
     $("#send_message").click(sendMessage);
@@ -405,7 +314,7 @@
   function sendMessage() {
     var text = $("#type_message").val();
     console.log(text);
-    $.post("http://localhost:3301/messages", { message: text });
+    $.post("http://localhost:3301/messages", { text: text });
   }
 
   socket.on("message", insertMessage);
@@ -420,10 +329,8 @@
   }
 
   function insertMessage(message) {
-    if (message.sender == senderInUI) {
-      $("#all_messages").append(outgoingMessage(message.message));
-    } else {
-      $("#all_messages").append(incomingMessage(message.message));
-    }
+    $("#all_messages").append(
+      generateMessage(message.senderUserName, message.text)
+    );
   }
 </script>

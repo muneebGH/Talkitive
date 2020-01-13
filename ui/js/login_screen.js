@@ -31,6 +31,7 @@ function validateUser() {
       try {
         if (data[0].password == user.password) {
           console.log("yes called ");
+          document.cookie.userName = data[0].userName;
           window.location.href = "http://localhost:3301/selectChatRoom";
         } else {
           alert("no man u cannot fool me ");

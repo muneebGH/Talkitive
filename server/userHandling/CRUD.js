@@ -7,8 +7,8 @@ async function establishConnection() {
     dbUrl,
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
-      console.log("a user connected ");
-      console.log("error in user connection =" + err);
+      console.log("a user connected to users");
+      console.log("error in user connection to users =" + err);
     }
   );
 }

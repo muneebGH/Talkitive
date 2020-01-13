@@ -1,22 +1,22 @@
 var db = require("mongoose");
 
-function establishConnection() {
+async function establishConnection() {
   dbUrl = String.raw`mongodb+srv://root:iamroot@users-zkdte.mongodb.net/test?retryWrites=true&w=majority`;
 
-  db.connect(
+  await db.connect(
     dbUrl,
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
-      console.log("a user connected ");
-      console.log("error in user connection =" + err);
+      console.log("a user connected to messages");
+      console.log("error in user connection to messages=" + err);
     }
   );
 }
 
 var Messages = new db.Schema({
-  sender: String,
-  reciever: String,
-  message: String
+  chatRoomTitle: String,
+  senderUserName: String,
+  text: String
 });
 
 var message = db.model("Messages", Messages);
@@ -26,7 +26,7 @@ async function addMessage(messageIn) {
 
   await establishConnection();
   var messageToBeInserted = new message(messageIn);
-  messageToBeInserted.save(err => {
+  await messageToBeInserted.save(err => {
     if (err) {
       done = false;
     }
@@ -35,8 +35,8 @@ async function addMessage(messageIn) {
   return done;
 }
 
-async function getAllOf(senderIn, recieverIn) {
-  var res = await message.find({ sender: senderIn, reciever: recieverIn });
+async function getAllOf(chatRoomTitleIn) {
+  var res = await message.find({ chatRoomTitle: chatRoomTitleIn });
 
   return res;
 }

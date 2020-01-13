@@ -98,3 +98,25 @@ function outgoingMessage(text) {
   </div>
 </div>`;
 }
+
+function generateMessage(sender, text) {
+  return String.raw` <div
+  class="card shadow-sm rounded-pill "
+  style="background-color: #ff6666;box-shadow: 0 .25rem 2rem #66cccc !important"
+>
+  <div class="card-body">
+    <h5
+      class="card-title justify-content-center d-flex"
+      style="color: #fff;"
+    >
+      ${sender}
+    </h5>
+    <p
+      class="card-text justify-content-center d-flex"
+      style="color: #fff;"
+    >
+      ${text}
+    </p>
+  </div>
+  <br>`;
+}
