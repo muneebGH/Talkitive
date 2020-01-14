@@ -52,11 +52,43 @@
 
     <div class="container-fluid bg-warning">
       <div class="container-fluid">
-        <h1
-          class="font-weight-lighter font-italic d-flex justify-content-center"
-        >
-          Chat Room
-        </h1>
+        <div class="cotainer justify-content-center d-flex">
+          <img
+            src="../assets/logo.png"
+            alt=""
+            class="rounded float-left"
+            height="150px"
+            data-toggle="modal"
+            data-target=".bd-example-modal-lg"
+          />
+
+          <div
+            class="modal fade bd-example-modal-lg"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="myLargeModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <a
+                  href="http://localhost:3301/selectChatRoom"
+                  type="button"
+                  class="btn btn-outline-dark"
+                  >chatrooms</a
+                >
+
+                <a
+                  href="http://localhost:3301/logout"
+                  type="button"
+                  class="btn btn-outline-dark"
+                  >logout</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="messaging">
           <div
             class="mesgs bg-white shadow-lg"

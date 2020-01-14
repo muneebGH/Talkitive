@@ -39,6 +39,11 @@ io.on("connection", socket => {
   console.log("socket io successfull");
 });
 
+app.get("/logout", (req, res) => {
+  res.clearCookie("userName");
+  res.clearCookie("chatRoomTitle");
+  return res.redirect("/");
+});
 app.get("/", async (req, res) => {
   //  await connectDB();
   try {
