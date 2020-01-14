@@ -65,12 +65,13 @@ app.get("/signup", (req, res) => {
   res.clearCookie("userName");
   res.sendFile(path.resolve("./ui/screens/signup_screen.html"));
 });
-app.get("/chat", (req, res) => {
+app.get("/chat", async (req, res) => {
   // senderId = req.cookies.userName;
   // recieverId = req.cookies.recieverName;
   var user = req.cookies.userName.toString();
   console.log();
   io.emit("setUserNameChatScreen", { userName: user });
+
   res.sendFile(path.resolve("./ui/screens/chat_screen.html"));
 });
 
@@ -176,4 +177,10 @@ app.get("/verifyChatRoom", async (req, res) => {
   } catch (error) {
     res.send({ status: "false" });
   }
+});
+
+//after
+
+app.get("/myChatRoomTitle", (req, res) => {
+  res.send(req.cookies.chatRoomTitle);
 });

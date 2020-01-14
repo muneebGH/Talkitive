@@ -51,6 +51,7 @@
       </p>
     <![endif]-->
 
+    <input type="hidden" id="chatRoomTitleHidden" value="wer" />
     <div class="container-fluid bg-warning">
       <div class="container-fluid">
         <div class="cotainer justify-content-center d-flex">
@@ -335,10 +336,17 @@
   var userName = "";
 
   $(() => {
+    setHiddenField();
     $("#send_message").click(sendMessage);
     getMessages();
   });
 
+  function setHiddenField() {
+    $.get("http://localhost:3301/myChatRoomTitle", data => {
+      console.log(data);
+      $("#chatRoomTitleHidden").val(data);
+    });
+  }
   function sendMessage() {
     var text = $("#type_message").val();
     $("#type_message").val(" ");
@@ -358,8 +366,10 @@
   }
 
   function insertMessage(message) {
-    $("#all_messages").append(
-      generateMessage(message.senderUserName, message.text)
-    );
+    if ($("#chatRoomTitleHidden").val() == message.chatRoomTitle) {
+      $("#all_messages").append(
+        generateMessage(message.senderUserName, message.text)
+      );
+    }
   }
 </script>
