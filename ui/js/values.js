@@ -100,23 +100,18 @@ function outgoingMessage(text) {
 }
 
 function generateMessage(sender, text) {
-  return String.raw` <div
-  class="card shadow-sm rounded-pill "
-  style="background-color: #ff6666;box-shadow: 0 .25rem 2rem #66cccc !important"
->
+  return String.raw` <div class="card shadow-sm">
   <div class="card-body">
     <h5
-      class="card-title justify-content-center d-flex"
-      style="color: #fff;"
+      class="card-title justify-content-center d-flex font-weight-light"
+      style="color: #cc0066;"
     >
       ${sender}
     </h5>
-    <p
-      class="card-text justify-content-center d-flex"
-      style="color: #fff;"
-    >
+    <p class="card-text justify-content-center d-flex">
       ${text}
     </p>
   </div>
-  <br>`;
+</div>
+<br>`;
 }
