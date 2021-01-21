@@ -16,7 +16,7 @@
     "ibm-watson": "^5.2.1",
     "jquery": "^3.4.1",
     "mongoose": "^5.8.5",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "tunnel": "0.0.6"
   }
 }
